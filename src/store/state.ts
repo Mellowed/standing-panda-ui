@@ -22,5 +22,6 @@ export class State {
   } as WsDataConfigStruct;
   uiConfig = {
     loggingEnabled: false,
+    websocketConnected: true,
   };
 }

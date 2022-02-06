@@ -168,12 +168,18 @@
                     <v-icon>mdi-angle-right</v-icon>
                   </v-list-item-icon>
                   <v-list-item-title class="text-right">
-                    {{ roll }} Deg
+                    {{ offsetRoll }} Deg
                   </v-list-item-title>
                 </v-list-item>
               </template>
-              <span>Roll: {{ roll }} </span>
-              <span>Pitch: {{ pitch }} </span>
+              <div>
+                <pre>
+Roll: {{ roll }} , Offset: {{ rollOffset }} , Limit: {{ rollLimit }}</pre
+                >
+                <pre>
+Pitch: {{ pitch }} , Offset: {{ pitchOffset }} , Limit: {{ pitchLimit }}</pre
+                >
+              </div>
             </v-tooltip>
           </v-list>
         </v-col>
@@ -316,11 +322,26 @@ export default Vue.extend({
     selectedHeight: 70,
   }),
   computed: {
+    offsetRoll(): number {
+      return +(Math.abs(this.roll) - this.rollOffset).toFixed(2);
+    },
     currentHeight(): number {
       return +StoreApi.getState().sensors.height / 10;
     },
     roll(): number {
       return +StoreApi.getState().sensors.roll.toFixed(2);
+    },
+    rollOffset(): number {
+      return +StoreApi.getState().mcuConfig.rollOffset;
+    },
+    rollLimit(): number {
+      return +StoreApi.getState().mcuConfig.rollLimit;
+    },
+    pitchOffset(): number {
+      return +StoreApi.getState().mcuConfig.pitchOffset;
+    },
+    pitchLimit(): number {
+      return +StoreApi.getState().mcuConfig.pitchLimit;
     },
     pitch(): number {
       return +StoreApi.getState().sensors.pitch.toFixed(2);

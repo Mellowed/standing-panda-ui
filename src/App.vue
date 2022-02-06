@@ -3,12 +3,29 @@
     <v-main>
       <v-app-bar app color="black" dark>
         <v-btn
-          href="https://github.com/Mellowed?tab=repositories"
+          href="https://github.com/Mellowed/standing-panda"
           target="_blank"
           text
         >
           <v-toolbar-title>Standing Panda</v-toolbar-title>
         </v-btn>
+
+        <!-- descend by 1 cm -->
+        <v-list-item-icon class="mr-0">
+          <v-tooltip bottom color="primary">
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon
+                v-if="!webSocketsConnected"
+                color="error"
+                v-bind="attrs"
+                v-on="on"
+                class="ml-5"
+                >mdi-alert-circle-outline</v-icon
+              >
+            </template>
+            <span>Failed to connect via websocket</span>
+          </v-tooltip>
+        </v-list-item-icon>
 
         <v-spacer></v-spacer>
 
@@ -76,6 +93,9 @@ export default Vue.extend({
   computed: {
     enableLogging(): boolean {
       return StoreApi.getState().uiConfig.loggingEnabled;
+    },
+    webSocketsConnected(): boolean {
+      return StoreApi.getState().uiConfig.websocketConnected;
     },
   },
   mounted() {

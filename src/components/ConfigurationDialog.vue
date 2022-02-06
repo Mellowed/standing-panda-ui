@@ -109,7 +109,7 @@
             <v-text-field
               v-model="local.rollOffset"
               dense
-              hint="A value between 0 - 25 Degrees "
+              hint="A value between 0 - 180 Degrees "
               outlined
               label="The Roll offset (Degrees)"
               type="number"
@@ -147,7 +147,7 @@
             <v-text-field
               v-model="local.pitchOffset"
               dense
-              hint="A value between 0 - 25 Degrees"
+              hint="A value between 0 - 180 Degrees"
               outlined
               label="Max pitch offset (Degrees)"
               type="number"
@@ -292,7 +292,7 @@ export default Vue.extend({
       this.local.rollLimit = this.rollLimit;
       this.local.pitchOffset = this.pitchOffset;
       this.local.pitchLimit = this.pitchLimit;
-      this.local.safetyEnabled = this.safetyEnabled;
+      this.local.safetyEnabled = this.safetyEnabled == 1 ? true : false;
     },
     savePresetHeight1() {
       DeskService.getInstance().saveConfigurationItem(
@@ -360,7 +360,7 @@ export default Vue.extend({
         rollLimit: 0,
         pitchOffset: 0,
         pitchLimit: 0,
-        safetyEnabled: 1,
+        safetyEnabled: true,
       },
     };
   },

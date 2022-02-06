@@ -1,3 +1,5 @@
+import StoreApi from "./storeApi";
+
 export default class WebsocketService {
   private static gateway = `ws://${window.location.hostname}/ws`;
   private static websocket: WebSocket;
@@ -28,14 +30,17 @@ export default class WebsocketService {
     WebsocketService.websocket.onmessage = this.onMessage;
   }
 
+  // User defined on message function
   public setOnMessage(functionCall: (_event: any) => void) {
     WebsocketService.websocket.onmessage = functionCall;
   }
 
+  // User defined on open function
   public setOnOpen(functionCall: () => void) {
     WebsocketService.websocket.onopen = functionCall;
   }
 
+  // User defined on close function
   public setOnClose(functionCall: () => void) {
     WebsocketService.websocket.onclose = functionCall;
   }
@@ -43,12 +48,14 @@ export default class WebsocketService {
   // Default handlers, they should be replaced using the calls above
   private onOpen(_event: any) {
     console.log("Connection opened");
+    StoreApi.setItem("uiConfig.websocketConnected", true);
   }
 
   // Default handlers, they should be replaced using the calls above
   private onClose(_event: any) {
     console.log("Connection closed");
-    setTimeout(this.initWebSocket, 2000);
+    StoreApi.setItem("uiConfig.websocketConnected", false);
+    setTimeout(() => WebsocketService.instance.initWebSocket(), 2000);
   }
 
   // Default handlers, they should be replaced using the calls above
