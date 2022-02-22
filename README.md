@@ -1,5 +1,9 @@
 # standing-panda-ui
 
+Please see the standing panda esp project for more details:
+
+https://github.com/Mellowed/standing-panda/blob/main/README.md
+
 ## Project setup
 
 ```
@@ -23,7 +27,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
